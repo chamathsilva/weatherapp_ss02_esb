@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Finder</title>
+
+    <link rel="stylesheet" type="text/css" href="css/background.css">
+    <link rel="stylesheet" type="text/css" href="css/3.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/backstyele.css">-->
+
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        var previousMaker = null;
+
+        function initialize() {
+            var mapProp = {
+                center:new google.maps.LatLng(7.8985,80.6771),
+                zoom:8,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            google.maps.event.addListener(map, "click", function(event) {
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
+                // populate yor box/field with lat, lng
+                placeMarker(event.latLng);
+
+
+                alert("Lat=" + lat + "; Lng=" + lng);
+            });
+
+            function placeMarker(location) {
+                /* Remove Previous Markers */
+                if (previousMaker != null){
+                    previousMaker.setMap(null);
+                }
+
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    animation: google.maps.Animation.DROP
+                });
+
+                //call bounce animation after second
+                setTimeout(function(){  marker.setAnimation(google.maps.Animation.BOUNCE); }, 300);
+
+                previousMaker = marker;
+            }
+
+
+
+
+
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+    </script>
+</head>
+
+<body>
+<!--<div id="clouds">-->
+    <!--<div class="cloud x1"></div>-->
+    <!--&lt;!&ndash; Time for multiple clouds to dance around &ndash;&gt;-->
+    <!--<div class="cloud x2"></div>-->
+    <!--<div class="cloud x3"></div>-->
+    <!--<div class="cloud x4"></div>-->
+    <!--<div class="cloud x5"></div>-->
+<!--</div>-->
+
+<!--<div class="ground"></div>-->
+<!--<div class="sky">-->
+    <!--<div class="cloud variant-1"></div>-->
+    <!--<div class="cloud variant-2"></div>-->
+    <!--<div class="cloud variant-3"></div>-->
+    <!--<div class="cloud variant-4"></div>-->
+    <!--<div class="cloud variant-5"></div>-->
+<!--</div>-->
+<!--<div class="rainbow-preloader">-->
+    <!--<div class="rainbow-stripe"></div>-->
+    <!--<div class="rainbow-stripe"></div>-->
+    <!--<div class="rainbow-stripe"></div>-->
+    <!--<div class="rainbow-stripe"></div>-->
+    <!--<div class="rainbow-stripe"></div>-->
+    <!--<div class="shadow"></div>-->
+    <!--<div class="shadow"></div>-->
+<!--</div>-->
+
+
+<!--<div class="my">-->
+    <!--<div class="sky">-->
+        <!--<div class="moon"></div>-->
+        <!--<div class="clouds_one"></div>-->
+        <!--<div class="clouds_two"></div>-->
+        <!--<div class="clouds_three"></div>-->
+    <!--</div>-->
+
+
+<!--</div>-->
+
+
+
+<div class="container">
+    <div class="sunny"></div>
+    <div class="cloudy"></div>
+    <div class="rainy"></div>
+    <div class="snowy"></div>
+    <div class="rainbow"></div>
+    <div class="starry"></div>
+    <div class="stormy"></div>
+</div>
+
+<!--<div id="wrapper">-->
+<!--<div class="background2" >-->
+
+    <!--<div class="content">-->
+        <!--<p>This text is in frontend</p>-->
+
+
+
+        <!--<div id="googleMap" style="width:500px;height:800px;"></div>-->
+
+    <!--</div>-->
+
+    <!--<div class="cloud large cloud-1">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud normal cloud-2">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud small cloud-3">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud tiny cloud-4">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud large cloud-5">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud normal cloud-6">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud small cloud-7">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud tiny cloud-8">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud small cloud-9">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud normal cloud-10">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud tiny cloud-11">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+    <!--<div class="cloud small cloud-12">-->
+        <!--<div></div><div></div><div></div><div></div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+
+
+<!--<div id="wrapper">-->
+    <!--<div class="content">-->
+        <!--<p>This text is in frontend</p>-->
+    <!--</div>-->
+    <!--<div class="background2">-->
+        <!--<p>Background text</p>-->
+        <!--<img src="http://nuclearpixel.com/content/icons/2010-02-09_stellar_icons_from_space_from_2005/earth_128.png" alt="background" />-->
+        <!--<img src="http://upload.wikimedia.org/wikipedia/en/0/0c/IrfanView_Logo.png" alt="background 2" />-->
+
+    <!--</div>-->
+<!--</div>-->
+
+
+
+
+
+<!--<div id="googleMap" style="width:500px;height:800px;"></div>-->
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="chamath">
+
+    <title>Weather Finder | Home</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-frontpage.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+
+    <!--map related script-->
+
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+
+    <script src="js/map.js"></script>
+
+
+    <!--icon set-->
+    <link rel="stylesheet" type="text/css" href="css/3.css">
+
+
+
+    <!--<link rel="stylesheet" type="text/css" href="css/2.css">-->
+
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">My Weather</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Image Background Page Header -->
+<!-- Note: The background image is set within the business-casual.css file. -->
+<!--     <header class="business-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="tagline">Business Name or Tagline</h1>
+                </div>
+            </div>
+        </div>
+    </header> -->
+
+<!-- Page Content -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+
+
+            <div class="" style="background-color: rgba(255,255,255,0.3); padding:10px 10px 10px 10px;">
+
+
+                <form role="form">
+                    <div class="form-group col-xs-6" >
+                        <label for="Latitude"></label>
+                        <input class="form-control input-lg" id="latitude" placeholder="Latitude" type="text">
+                    </div>
+
+                    <div class="form-group col-xs-6" >
+                        <label for="longitude"></label>
+                        <input class="form-control input-lg" id="longitude" placeholder="longitude" type="text">
+                    </div>
+                    <div class="form-group text-center " >
+                        <button type="button" class="btn btn-primary btn-lg mysize" id="findWeather">Find</button>
+                    </div>
+
+                </form>
+            </div><!--end of the well-->
+
+            <div class="row" style="margin-top: 50px; ">
+
+
+
+                <div class="col-sm-12">
+                    <div class="iconContainer" style="margin-left: 150px;z-index: 100">
+                        <div class="rainy" id="rainy" style="display: none"></div>
+                        <div class="snowy" id="snowy"  style="display: none"></div>
+                        <div class="rainbow" id="rainbow" style="display: none"></div>
+                        <div class="starry" id="starry" style="display: none"></div>
+                        <div class="stormy" id="stormy" style="display: none"></div>
+                        <div class="sunny" id="sunny"  style="display: none"></div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-12">
+                    <h3 id = "error" style="display:none;color: #fff"> City Not Found....</h3>
+
+                    <div id="info" style="background-color: rgba(255,255,255,0.3); padding:10px 10px 10px 10px; display:none" >
+
+
+
+                        <table class="table table-condensed" >
+                            <tbody>
+                            <tr>
+                                <td>City Name</td>
+                                <td id="cityname"></td>
+                            </tr>
+                            <tr>
+                                <td>Type</td>
+                                <td id="type"></td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td id="description"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Humidity</td>
+                                <td id="humidity"></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Temp</td>
+                                <td id="temp"></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Pressure</td>
+                                <td id="pressure"></td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="cloud large cloud-1">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud normal cloud-2">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud small cloud-3">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud tiny cloud-4">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud large cloud-5">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud normal cloud-6">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud small cloud-7">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud tiny cloud-8">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud small cloud-9">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud normal cloud-10">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud tiny cloud-11">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="cloud small cloud-12">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+
+
+
+
+
+                 </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-sm-6">
+            <!--map-->
+            <div id="googleMap" style="width:100%;height:700px;"></div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+</div>
+<!-- /.container -->
+
+
+
+</body>
+
+<script>
+    var Latitude = $("#latitude");
+    var longitude = $("#longitude");
+
+
+    // set lat & lon when click the map
+    // call this function inside the map.js in mac "click" event
+    function setLatLog(lat,lon){
+        Latitude.val(lat);
+        longitude.val(lon);
+    }
+
+    http://chamaths-macbook-air.local:8280/services/mytest1?lat=52.54877605&lon=-1.81627023283164
+
+    $( "#findWeather" ).click(function() {
+//        alert( "Handler for .click() called."+ Latitude.val() + "----" +longitude.val());
+        $.getJSON( "http://chamaths-macbook-air.local:8280/services/MyWeaterApp?callback=?",{"lat" :Latitude.val() ,"lon" :longitude.val()}, function( data ) {
+//            console.log(data);
+//            alert("hello world");
+
+        });
+
+    });
+
+
+    function mywrap(data){
+        console.log(data);
+
+        if (data.error == "false"){
+            $("#info").slideUp("slow");
+            $("#error").slideUp("slow");
+            removeIcon();
+
+
+
+            $('#cityname').html(data.name);
+            $('#type').html(data.main);
+            $('#description').html(data.description);
+            $('#humidity').html(data.humidity);
+            $('#temp').html(data.temp);
+            $('#pressure').html(data.pressure);
+
+            var icon =  data.icon;
+
+            if(icon == '01d' || icon == '01n'){
+                $('#sunny').slideDown("fast");
+            }
+            else if(icon == '02d' ||  icon == '02n' ||  icon == '03d' ||  icon == '03n' ||  icon == '04d' ||  icon == '04n'){
+                $('#snowy').slideDown("fast");
+            }
+            else if(icon == '10d'){
+                $('#rainy').slideDown("fast");
+
+            }
+            else if(icon == '09d' || icon == '09n' || icon == '10n'){
+                $('#rainy').slideDown("fast");
+            }
+            else if(icon = '11d' || icon == '11n'){
+                $('#stormy').slideDown("fast");
+
+            }
+            else if(icon == '13d' || icon == '13n'){
+                $('#starry').slideDown("fast");
+
+            }
+
+            $("#info").slideDown("slow");
+
+        }else{
+            alert("City Not Found");
+            removeIcon();
+            $("#info").slideUp("slow");
+            $("#error").slideDown("slow");
+
+        }
+    }
+
+    function removeIcon(){
+        $('#sunny').slideUp("fast");
+        $('#snowy').slideUp("fast");
+        $('#rainy').slideUp("fast");
+        $('#stormy').slideUp("fast");
+        $('#starry').slideUp("fast");
+
+    }
+
+
+
+
+
+
+
+</script>
+
+</html>
