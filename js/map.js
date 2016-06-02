@@ -7,7 +7,7 @@ var previousMaker = null;
 function initialize() {
     var mapProp = {
         center:new google.maps.LatLng(7.8985,80.6771),
-        zoom:2,
+        zoom:8,
         mapTypeId:google.maps.MapTypeId.ROADMAP
     };
 

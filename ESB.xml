@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="MyWeaterApp"
+       transports="http,https"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="uri.var.lat"
+                      expression="$url:lat"
+                      scope="default"
+                      type="STRING"/>
+            <property name="uri.var.lon"
+                      expression="$url:lon"
+                      scope="default"
+                      type="STRING"/>
+            <call>
+                <endpoint>
+                    <http uri-template="http://nominatim.openstreetmap.org/reverse?lat={uri.var.lat}&amp;lon={uri.var.lon}"/>
+                </endpoint>
+            </call>
+            <filter xpath="//reversegeocode/addressparts/city">
+                <then>
+                    <property name="uri.var.q"
+                              expression="//reversegeocode/addressparts/city"
+                              scope="default"
+                              type="STRING"/>
+                    <property name="uri.var.appid"
+                              value="e3c746368476f3c39a6d6d01e44e3cf5"
+                              scope="default"
+                              type="STRING"/>
+                    <call>
+                        <endpoint>
+                            <http uri-template="http://api.openweathermap.org/data/2.5/weather?q={uri.var.q}&amp;appid={uri.var.appid}"/>
+                        </endpoint>
+                    </call>
+                </then>
+                <else>
+                    <payloadFactory media-type="json">
+                        <format>mywrap({"error":"true","message" : "error - City not found. Wrong inputs"})
+
+
+                        </format>
+                        <args/>
+                    </payloadFactory>
+                    <respond/>
+                </else>
+            </filter>
+            <loopback/>
+        </inSequence>
+        <outSequence>
+            <log level="full"/>
+            <payloadFactory media-type="json">
+                <format>mywrap({"error":"false","main":"$1", "description":"$2","icon":"$3","temp":"$4","name":"$5","pressure":"$6","humidity":"$7"})</format>
+                <args>
+                    <arg evaluator="json" expression="$.weather[0].main"/>
+                    <arg evaluator="json" expression="$.weather[0].description"/>
+                    <arg evaluator="json" expression="$.weather[0].icon"/>
+                    <arg evaluator="json" expression="$.main.temp"/>
+                    <arg evaluator="json" expression="$name"/>
+                    <arg evaluator="json" expression="$.main.pressure"/>
+                    <arg evaluator="json" expression="$.main.humidity"/>
+                </args>
+            </payloadFactory>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>
